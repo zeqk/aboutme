@@ -1,0 +1,827 @@
+body * {
+    box-sizing: border-box;
+  }
+  
+  .board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-pack: end;
+    height: 100vh;
+    filter: drop-shadow(6px 6px 4px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+  }
+  
+  .is-dragging {
+    z-index: 999;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2), 5px 5px 10px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  .brick {
+    color: #f63;
+    background-color: currentColor;
+    padding: 6px;
+    min-width: 27px;
+    min-height: 27px;
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.2), inset 1px 1px 0 rgba(255, 255, 255, 0.2);
+    background-image: radial-gradient(currentColor 7.5px, transparent 8.5px), radial-gradient(rgba(255, 255, 255, 0.6) 7.5px, transparent 8.5px), radial-gradient(rgba(0, 0, 0, 0.2) 7.5px, transparent 10.5px), radial-gradient(rgba(0, 0, 0, 0.2) 7.5px, transparent 10.5px);
+    background-size: 27px 27px;
+    background-position: 0px 0px, -0.5px -0.5px, 0px 0px, 3px 3px;
+    background-repeat: repeat;
+  }
+  
+  .b-red {
+    color: #e53935;
+  }
+  
+  .b-pink {
+    color: #d81b60;
+  }
+  
+  .b-purple {
+    color: #8e24aa;
+  }
+  
+  .b-deep-purple {
+    color: #5e35b1;
+  }
+  
+  .b-indigo {
+    color: #3949ab;
+  }
+  
+  .b-blue {
+    color: #1e88e5;
+  }
+  
+  .b-light-blue {
+    color: #039be5;
+  }
+  
+  .b-cyan {
+    color: #00acc1;
+  }
+  
+  .b-teal {
+    color: #00897b;
+  }
+  
+  .b-green {
+    color: #43a047;
+  }
+  
+  .b-light-green {
+    color: #7cb342;
+  }
+  
+  .b-lime {
+    color: #c0ca33;
+  }
+  
+  .b-yellow {
+    color: #fdd835;
+  }
+  
+  .b-amber {
+    color: #ffb300;
+  }
+  
+  .b-orange {
+    color: #fb8c00;
+  }
+  
+  .b-deep-orange {
+    color: #f4511e;
+  }
+  
+  .b-brown {
+    color: #6d4c41;
+  }
+  
+  .b-grey {
+    color: #757575;
+  }
+  
+  .b-blue-grey {
+    color: #546e7a;
+  }
+  
+  .b-1x1 {
+    width: 27px;
+    height: 27px;
+  }
+  
+  .b-1x2 {
+    width: 27px;
+    height: 54px;
+  }
+  
+  .b-1x3 {
+    width: 27px;
+    height: 81px;
+  }
+  
+  .b-1x4 {
+    width: 27px;
+    height: 108px;
+  }
+  
+  .b-1x5 {
+    width: 27px;
+    height: 135px;
+  }
+  
+  .b-1x6 {
+    width: 27px;
+    height: 162px;
+  }
+  
+  .b-1x7 {
+    width: 27px;
+    height: 189px;
+  }
+  
+  .b-1x8 {
+    width: 27px;
+    height: 216px;
+  }
+  
+  .b-1x9 {
+    width: 27px;
+    height: 243px;
+  }
+  
+  .b-1x10 {
+    width: 27px;
+    height: 270px;
+  }
+  
+  .b-1x11 {
+    width: 27px;
+    height: 297px;
+  }
+  
+  .b-1x12 {
+    width: 27px;
+    height: 324px;
+  }
+  
+  .b-2x1 {
+    width: 54px;
+    height: 27px;
+  }
+  
+  .b-2x2 {
+    width: 54px;
+    height: 54px;
+  }
+  
+  .b-2x3 {
+    width: 54px;
+    height: 81px;
+  }
+  
+  .b-2x4 {
+    width: 54px;
+    height: 108px;
+  }
+  
+  .b-2x5 {
+    width: 54px;
+    height: 135px;
+  }
+  
+  .b-2x6 {
+    width: 54px;
+    height: 162px;
+  }
+  
+  .b-2x7 {
+    width: 54px;
+    height: 189px;
+  }
+  
+  .b-2x8 {
+    width: 54px;
+    height: 216px;
+  }
+  
+  .b-2x9 {
+    width: 54px;
+    height: 243px;
+  }
+  
+  .b-2x10 {
+    width: 54px;
+    height: 270px;
+  }
+  
+  .b-2x11 {
+    width: 54px;
+    height: 297px;
+  }
+  
+  .b-2x12 {
+    width: 54px;
+    height: 324px;
+  }
+  
+  .b-3x1 {
+    width: 81px;
+    height: 27px;
+  }
+  
+  .b-3x2 {
+    width: 81px;
+    height: 54px;
+  }
+  
+  .b-3x3 {
+    width: 81px;
+    height: 81px;
+  }
+  
+  .b-3x4 {
+    width: 81px;
+    height: 108px;
+  }
+  
+  .b-3x5 {
+    width: 81px;
+    height: 135px;
+  }
+  
+  .b-3x6 {
+    width: 81px;
+    height: 162px;
+  }
+  
+  .b-3x7 {
+    width: 81px;
+    height: 189px;
+  }
+  
+  .b-3x8 {
+    width: 81px;
+    height: 216px;
+  }
+  
+  .b-3x9 {
+    width: 81px;
+    height: 243px;
+  }
+  
+  .b-3x10 {
+    width: 81px;
+    height: 270px;
+  }
+  
+  .b-3x11 {
+    width: 81px;
+    height: 297px;
+  }
+  
+  .b-3x12 {
+    width: 81px;
+    height: 324px;
+  }
+  
+  .b-4x1 {
+    width: 108px;
+    height: 27px;
+  }
+  
+  .b-4x2 {
+    width: 108px;
+    height: 54px;
+  }
+  
+  .b-4x3 {
+    width: 108px;
+    height: 81px;
+  }
+  
+  .b-4x4 {
+    width: 108px;
+    height: 108px;
+  }
+  
+  .b-4x5 {
+    width: 108px;
+    height: 135px;
+  }
+  
+  .b-4x6 {
+    width: 108px;
+    height: 162px;
+  }
+  
+  .b-4x7 {
+    width: 108px;
+    height: 189px;
+  }
+  
+  .b-4x8 {
+    width: 108px;
+    height: 216px;
+  }
+  
+  .b-4x9 {
+    width: 108px;
+    height: 243px;
+  }
+  
+  .b-4x10 {
+    width: 108px;
+    height: 270px;
+  }
+  
+  .b-4x11 {
+    width: 108px;
+    height: 297px;
+  }
+  
+  .b-4x12 {
+    width: 108px;
+    height: 324px;
+  }
+  
+  .b-5x1 {
+    width: 135px;
+    height: 27px;
+  }
+  
+  .b-5x2 {
+    width: 135px;
+    height: 54px;
+  }
+  
+  .b-5x3 {
+    width: 135px;
+    height: 81px;
+  }
+  
+  .b-5x4 {
+    width: 135px;
+    height: 108px;
+  }
+  
+  .b-5x5 {
+    width: 135px;
+    height: 135px;
+  }
+  
+  .b-5x6 {
+    width: 135px;
+    height: 162px;
+  }
+  
+  .b-5x7 {
+    width: 135px;
+    height: 189px;
+  }
+  
+  .b-5x8 {
+    width: 135px;
+    height: 216px;
+  }
+  
+  .b-5x9 {
+    width: 135px;
+    height: 243px;
+  }
+  
+  .b-5x10 {
+    width: 135px;
+    height: 270px;
+  }
+  
+  .b-5x11 {
+    width: 135px;
+    height: 297px;
+  }
+  
+  .b-5x12 {
+    width: 135px;
+    height: 324px;
+  }
+  
+  .b-6x1 {
+    width: 162px;
+    height: 27px;
+  }
+  
+  .b-6x2 {
+    width: 162px;
+    height: 54px;
+  }
+  
+  .b-6x3 {
+    width: 162px;
+    height: 81px;
+  }
+  
+  .b-6x4 {
+    width: 162px;
+    height: 108px;
+  }
+  
+  .b-6x5 {
+    width: 162px;
+    height: 135px;
+  }
+  
+  .b-6x6 {
+    width: 162px;
+    height: 162px;
+  }
+  
+  .b-6x7 {
+    width: 162px;
+    height: 189px;
+  }
+  
+  .b-6x8 {
+    width: 162px;
+    height: 216px;
+  }
+  
+  .b-6x9 {
+    width: 162px;
+    height: 243px;
+  }
+  
+  .b-6x10 {
+    width: 162px;
+    height: 270px;
+  }
+  
+  .b-6x11 {
+    width: 162px;
+    height: 297px;
+  }
+  
+  .b-6x12 {
+    width: 162px;
+    height: 324px;
+  }
+  
+  .b-7x1 {
+    width: 189px;
+    height: 27px;
+  }
+  
+  .b-7x2 {
+    width: 189px;
+    height: 54px;
+  }
+  
+  .b-7x3 {
+    width: 189px;
+    height: 81px;
+  }
+  
+  .b-7x4 {
+    width: 189px;
+    height: 108px;
+  }
+  
+  .b-7x5 {
+    width: 189px;
+    height: 135px;
+  }
+  
+  .b-7x6 {
+    width: 189px;
+    height: 162px;
+  }
+  
+  .b-7x7 {
+    width: 189px;
+    height: 189px;
+  }
+  
+  .b-7x8 {
+    width: 189px;
+    height: 216px;
+  }
+  
+  .b-7x9 {
+    width: 189px;
+    height: 243px;
+  }
+  
+  .b-7x10 {
+    width: 189px;
+    height: 270px;
+  }
+  
+  .b-7x11 {
+    width: 189px;
+    height: 297px;
+  }
+  
+  .b-7x12 {
+    width: 189px;
+    height: 324px;
+  }
+  
+  .b-8x1 {
+    width: 216px;
+    height: 27px;
+  }
+  
+  .b-8x2 {
+    width: 216px;
+    height: 54px;
+  }
+  
+  .b-8x3 {
+    width: 216px;
+    height: 81px;
+  }
+  
+  .b-8x4 {
+    width: 216px;
+    height: 108px;
+  }
+  
+  .b-8x5 {
+    width: 216px;
+    height: 135px;
+  }
+  
+  .b-8x6 {
+    width: 216px;
+    height: 162px;
+  }
+  
+  .b-8x7 {
+    width: 216px;
+    height: 189px;
+  }
+  
+  .b-8x8 {
+    width: 216px;
+    height: 216px;
+  }
+  
+  .b-8x9 {
+    width: 216px;
+    height: 243px;
+  }
+  
+  .b-8x10 {
+    width: 216px;
+    height: 270px;
+  }
+  
+  .b-8x11 {
+    width: 216px;
+    height: 297px;
+  }
+  
+  .b-8x12 {
+    width: 216px;
+    height: 324px;
+  }
+  
+  .b-9x1 {
+    width: 243px;
+    height: 27px;
+  }
+  
+  .b-9x2 {
+    width: 243px;
+    height: 54px;
+  }
+  
+  .b-9x3 {
+    width: 243px;
+    height: 81px;
+  }
+  
+  .b-9x4 {
+    width: 243px;
+    height: 108px;
+  }
+  
+  .b-9x5 {
+    width: 243px;
+    height: 135px;
+  }
+  
+  .b-9x6 {
+    width: 243px;
+    height: 162px;
+  }
+  
+  .b-9x7 {
+    width: 243px;
+    height: 189px;
+  }
+  
+  .b-9x8 {
+    width: 243px;
+    height: 216px;
+  }
+  
+  .b-9x9 {
+    width: 243px;
+    height: 243px;
+  }
+  
+  .b-9x10 {
+    width: 243px;
+    height: 270px;
+  }
+  
+  .b-9x11 {
+    width: 243px;
+    height: 297px;
+  }
+  
+  .b-9x12 {
+    width: 243px;
+    height: 324px;
+  }
+  
+  .b-10x1 {
+    width: 270px;
+    height: 27px;
+  }
+  
+  .b-10x2 {
+    width: 270px;
+    height: 54px;
+  }
+  
+  .b-10x3 {
+    width: 270px;
+    height: 81px;
+  }
+  
+  .b-10x4 {
+    width: 270px;
+    height: 108px;
+  }
+  
+  .b-10x5 {
+    width: 270px;
+    height: 135px;
+  }
+  
+  .b-10x6 {
+    width: 270px;
+    height: 162px;
+  }
+  
+  .b-10x7 {
+    width: 270px;
+    height: 189px;
+  }
+  
+  .b-10x8 {
+    width: 270px;
+    height: 216px;
+  }
+  
+  .b-10x9 {
+    width: 270px;
+    height: 243px;
+  }
+  
+  .b-10x10 {
+    width: 270px;
+    height: 270px;
+  }
+  
+  .b-10x11 {
+    width: 270px;
+    height: 297px;
+  }
+  
+  .b-10x12 {
+    width: 270px;
+    height: 324px;
+  }
+  
+  .b-11x1 {
+    width: 297px;
+    height: 27px;
+  }
+  
+  .b-11x2 {
+    width: 297px;
+    height: 54px;
+  }
+  
+  .b-11x3 {
+    width: 297px;
+    height: 81px;
+  }
+  
+  .b-11x4 {
+    width: 297px;
+    height: 108px;
+  }
+  
+  .b-11x5 {
+    width: 297px;
+    height: 135px;
+  }
+  
+  .b-11x6 {
+    width: 297px;
+    height: 162px;
+  }
+  
+  .b-11x7 {
+    width: 297px;
+    height: 189px;
+  }
+  
+  .b-11x8 {
+    width: 297px;
+    height: 216px;
+  }
+  
+  .b-11x9 {
+    width: 297px;
+    height: 243px;
+  }
+  
+  .b-11x10 {
+    width: 297px;
+    height: 270px;
+  }
+  
+  .b-11x11 {
+    width: 297px;
+    height: 297px;
+  }
+  
+  .b-11x12 {
+    width: 297px;
+    height: 324px;
+  }
+  
+  .b-12x1 {
+    width: 324px;
+    height: 27px;
+  }
+  
+  .b-12x2 {
+    width: 324px;
+    height: 54px;
+  }
+  
+  .b-12x3 {
+    width: 324px;
+    height: 81px;
+  }
+  
+  .b-12x4 {
+    width: 324px;
+    height: 108px;
+  }
+  
+  .b-12x5 {
+    width: 324px;
+    height: 135px;
+  }
+  
+  .b-12x6 {
+    width: 324px;
+    height: 162px;
+  }
+  
+  .b-12x7 {
+    width: 324px;
+    height: 189px;
+  }
+  
+  .b-12x8 {
+    width: 324px;
+    height: 216px;
+  }
+  
+  .b-12x9 {
+    width: 324px;
+    height: 243px;
+  }
+  
+  .b-12x10 {
+    width: 324px;
+    height: 270px;
+  }
+  
+  .b-12x11 {
+    width: 324px;
+    height: 297px;
+  }
+  
+  .b-12x12 {
+    width: 324px;
+    height: 324px;
+  }
+  
